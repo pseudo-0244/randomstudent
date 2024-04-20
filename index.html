@@ -1,134 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> E Section Students</title></title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #1a237e, #283593);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .container {
-        text-align: center;
-    }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
 
-    h1 {
-        color: #333;
-    }
+        input[type="text"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
 
-    .button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
+        input[type="submit"] {
+            background-color: #1a237e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .student {
-        margin-top: 20px;
-        font-size: 24px;
-        color: #333;
-    }
-</style>
+        input[type="submit"]:hover {
+            background-color: #283593;
+        }
+    </style>
 </head>
+
 <body>
-<div class="container">
-    <h1>E section students </h1>
-    <button class="button" onclick="pickRandomStudent()">Pick a Random Student</button>
-    <p class="student" id="randomStudent"></p>
-</div>
-<script>
-    const students = [
-        "PES2UG23AM031",
-"PES2UG23AM032",
-"PES2UG23AM033",
-"PES2UG23AM034",
-"PES2UG23AM035",
-"PES2UG23AM036",
-"PES2UG23AM038",
-"PES2UG23CS181",
-"PES2UG23CS182",
-"PES2UG23CS183",
-"PES2UG23CS184",
-"PES2UG23CS185",
-"PES2UG23CS186",
-"PES2UG23CS187",
-"PES2UG23CS188",
-"PES2UG23CS189",
-"PES2UG23CS190",
-"PES2UG23CS191",
-"PES2UG23CS192",
-"PES2UG23CS193",
-"PES2UG23CS194",
-"PES2UG23CS195",
-"PES2UG23CS196",
-"PES2UG23CS197",
-"PES2UG23CS198",
-"PES2UG23CS199",
-"PES2UG23CS200",
-"PES2UG23CS201",
-"PES2UG23CS202",
-"PES2UG23CS204",
-"PES2UG23CS205",
-"PES2UG23CS206",
-"PES2UG23CS207",
-"PES2UG23CS208",
-"PES2UG23CS209",
-"PES2UG23CS210",
-"PES2UG23CS211",
-"PES2UG23CS212",
-"PES2UG23CS213",
-"PES2UG23CS214",
-"PES2UG23CS215",
-"PES2UG23CS216",
-"PES2UG23CS217",
-"PES2UG23CS218",
-"PES2UG23CS219",
-"PES2UG23CS220",
-"PES2UG23CS221",
-"PES2UG23CS222",
-"PES2UG23CS223",
-"PES2UG23CS224",
-"PES2UG23CS225",
-"PES2UG23EC045",
-"PES2UG23EC046",
-"PES2UG23EC047",
-"PES2UG23EC052",
-"PES2UG23EC053",
-"PES2UG23EC054",
-"PES2UG23EC055",
-"PES2UG23EC056",
-"PES2UG23EC057",
-"PES2UG23EC058",
-"PES2UG23EC059"
-    ];
+    <div class="form-container">
+        <h1>Query Form</h1>
+        <form id="queryForm">
+            <input type="text" id="name" name="name" placeholder="Your Name" required><br>
+            <input type="text" id="srn" name="srn" placeholder="Your SRN" required><br>
+            <textarea id="query" name="query" placeholder="Your Query" required></textarea><br>
+            <input type="submit" value="Send">
+        </form>
+    </div>
 
-    let pickedStudents = [];
-
-    function pickRandomStudent() {
-        if (pickedStudents.length === students.length) {
-            alert("All students have been picked!");
-            return;
-        }
-
-        let randomIndex = Math.floor(Math.random() * students.length);
-        while (pickedStudents.includes(randomIndex)) {
-            randomIndex = Math.floor(Math.random() * students.length);
-        }
-
-        pickedStudents.push(randomIndex);
-        document.getElementById("randomStudent").innerText = students[randomIndex];
-    }
-</script>
+    <script>
+        const form = document.getElementById('queryForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const values = Object.fromEntries(formData.entries());
+            console.log(values);
+            // Add your logic to send the form data to the server here
+        });
+    </script>
 </body>
+
 </html>
