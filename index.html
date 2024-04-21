@@ -132,6 +132,13 @@
         }
       }, 100);
     }
+    document.addEventListener('keydown', function(event) {
+  if (event.key === 'p' || event.key === 'P') {
+    pickRandomName();
+  } else if (event.key === 'r' || event.key === 'R') {
+    resetNames();
+  }
+});
   </script>
 </body>
 </html>
