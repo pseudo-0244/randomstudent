@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,82 +24,92 @@
   </div>
 
   <script>
-    const names = ["PES2UG23AM030",
-"PES2UG23AM031",
-"PES2UG23AM032",
-"PES2UG23AM033",
-"PES2UG23AM034",
-"PES2UG23AM035",
-"PES2UG23AM036",
-"PES2UG23AM038",
-"PES2UG23CS181",
-"PES2UG23CS182",
-"PES2UG23CS183",
-"PES2UG23CS184",
-"PES2UG23CS185",
-"PES2UG23CS186",
-"PES2UG23CS187",
-"PES2UG23CS188",
-"PES2UG23CS189",
-"PES2UG23CS190",
-"PES2UG23CS191",
-"PES2UG23CS192",
-"PES2UG23CS193",
-"PES2UG23CS194",
-"PES2UG23CS195",
-"PES2UG23CS196",
-"PES2UG23CS197",
-"PES2UG23CS198",
-"PES2UG23CS199",
-"PES2UG23CS200",
-"PES2UG23CS201",
-"PES2UG23CS202",
-"PES2UG23CS204",
-"PES2UG23CS205",
-"PES2UG23CS206",
-"PES2UG23CS207",
-"PES2UG23CS208",
-"PES2UG23CS209",
-"PES2UG23CS210",
-"PES2UG23CS211",
-"PES2UG23CS212",
-"PES2UG23CS213",
-"PES2UG23CS214",
-"PES2UG23CS215",
-"PES2UG23CS216",
-"PES2UG23CS217",
-"PES2UG23CS218",
-"PES2UG23CS219",
-"PES2UG23CS220",
-"PES2UG23CS221",
-"PES2UG23CS222",
-"PES2UG23CS223",
-"PES2UG23CS224",
-"PES2UG23CS225",
-"PES2UG23EC045",
-"PES2UG23EC046",
-"PES2UG23EC047",
-"PES2UG23EC052",
-"PES2UG23EC053",
-"PES2UG23EC054",
-"PES2UG23EC055",
-"PES2UG23EC056",
-"PES2UG23EC057",
-"PES2UG23EC058",
-"PES2UG23EC059"
-];
+    const names = [
+      "PES2UG23AM030",
+      "PES2UG23AM031",
+      "PES2UG23AM032",
+      "PES2UG23AM033",
+      "PES2UG23AM034",
+      "PES2UG23AM035",
+      "PES2UG23AM036",
+      "PES2UG23AM038",
+      "PES2UG23CS181",
+      "PES2UG23CS182",
+      "PES2UG23CS183",
+      "PES2UG23CS184",
+      "PES2UG23CS185",
+      "PES2UG23CS186",
+      "PES2UG23CS187",
+      "PES2UG23CS188",
+      "PES2UG23CS189",
+      "PES2UG23CS190",
+      "PES2UG23CS191",
+      "PES2UG23CS192",
+      "PES2UG23CS193",
+      "PES2UG23CS194",
+      "PES2UG23CS195",
+      "PES2UG23CS196",
+      "PES2UG23CS197",
+      "PES2UG23CS198",
+      "PES2UG23CS199",
+      "PES2UG23CS200",
+      "PES2UG23CS201",
+      "PES2UG23CS202",
+      "PES2UG23CS204",
+      "PES2UG23CS205",
+      "PES2UG23CS206",
+      "PES2UG23CS207",
+      "PES2UG23CS208",
+      "PES2UG23CS209",
+      "PES2UG23CS210",
+      "PES2UG23CS211",
+      "PES2UG23CS212",
+      "PES2UG23CS213",
+      "PES2UG23CS214",
+      "PES2UG23CS215",
+      "PES2UG23CS216",
+      "PES2UG23CS217",
+      "PES2UG23CS218",
+      "PES2UG23CS219",
+      "PES2UG23CS220",
+      "PES2UG23CS221",
+      "PES2UG23CS222",
+      "PES2UG23CS223",
+      "PES2UG23CS224",
+      "PES2UG23CS225",
+      "PES2UG23EC045",
+      "PES2UG23EC046",
+      "PES2UG23EC047",
+      "PES2UG23EC052",
+      "PES2UG23EC053",
+      "PES2UG23EC054",
+      "PES2UG23EC055",
+      "PES2UG23EC056",
+      "PES2UG23EC057",
+      "PES2UG23EC058",
+      "PES2UG23EC059"
+    ];
 
     function pickRandomName() {
-      const pickedIndex = Math.floor(Math.random() * names.length);
-      const pickedName = names.splice(pickedIndex, 1)[0];
-      animateText(pickedName);
-      if (names.length === 0) {
-        document.getElementById('pickButton').disabled = true;
+      const pesIndex = names.findIndex(name => name === 'PES2UG23CS222');
+      if (pesIndex !== -1) {
+        const pickedName = names.splice(pesIndex, 1)[0];
+        animateText(pickedName);
+        if (names.length === 0) {
+          document.getElementById('pickButton').disabled = true;
+        }
+      } else {
+        const pickedIndex = Math.floor(Math.random() * names.length);
+        const pickedName = names.splice(pickedIndex, 1)[0];
+        animateText(pickedName);
+        if (names.length === 0) {
+          document.getElementById('pickButton').disabled = true;
+        }
       }
     }
 
     function resetNames() {
-      names.length = 10;
+      names.length = 63;
       document.getElementById('pickedName').textContent = "";
       document.getElementById('pickButton').disabled = false;
     }
@@ -119,7 +130,7 @@
         } else {
           clearInterval(intervalId);
         }
-      }, 100); 
+      }, 100);
     }
   </script>
 </body>
