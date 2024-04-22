@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +23,7 @@
   </div>
 
   <script>
-    const names = [
+    let names = JSON.parse(localStorage.getItem('names')) || [
       "PES2UG23AM030",
       "PES2UG23AM031",
       "PES2UG23AM032",
@@ -91,25 +90,22 @@
     ];
 
     function pickRandomName() {
-      const pesIndex = names.findIndex(name => name === 'PES2UG23CS222');//Heth Special
-      if (pesIndex !== -1) {
-        const pickedName = names.splice(pesIndex, 1)[0];
-        animateText(pickedName);
-        if (names.length === 0) {
-          document.getElementById('pickButton').disabled = true;
-        }
-      } else {
-        const pickedIndex = Math.floor(Math.random() * names.length);
-        const pickedName = names.splice(pickedIndex, 1)[0];
-        animateText(pickedName);
-        if (names.length === 0) {
-          document.getElementById('pickButton').disabled = true;
-        }
+      if (names.length === 0) return;
+
+      
+      names = shuffle(names);
+
+      const pickedName = names.pop();
+      animateText(pickedName);
+
+      if (names.length === 0) {
+        document.getElementById('pickButton').disabled = true;
       }
+      localStorage.setItem('names', JSON.stringify(names));
     }
 
     function resetNames() {
-      names.length = 63;
+      names = JSON.parse(localStorage.getItem('names')) || [];
       document.getElementById('pickedName').textContent = "";
       document.getElementById('pickButton').disabled = false;
     }
@@ -132,13 +128,32 @@
         }
       }, 100);
     }
+
+    function shuffle(array) {
+      let currentIndex = array.length, temporaryValue, randomIndex;
+
+      
+      while (currentIndex !== 0) {
+
+        
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
     document.addEventListener('keydown', function(event) {
-  if (event.key === 'p' || event.key === 'P') {
-    pickRandomName();
-  } else if (event.key === 'r' || event.key === 'R') {
-    resetNames();
-  }
-});
+      if (event.key === 'p' || event.key === 'P') {
+        pickRandomName();
+      } else if (event.key === 'r' || event.key === 'R') {
+        resetNames();
+      }
+    });
   </script>
 </body>
 </html>
